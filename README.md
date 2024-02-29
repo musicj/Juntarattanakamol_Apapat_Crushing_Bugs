@@ -1,9 +1,6 @@
 # Juntarattanakamol_Apapat_HW1
 This is the repository of fixed crushing bugs.
 
-## Plan
-
-
 ## Usage
 In this repo can show how to slove the problem for crushing bugs.
 
