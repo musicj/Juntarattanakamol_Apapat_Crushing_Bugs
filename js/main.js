@@ -10,6 +10,7 @@ const theButtons = document.querySelectorAll("#buttonHolder img"),
 	theHeading = document.querySelector("#headLine h1"),
 	puzzleBoard = document.querySelector(".puzzle-board"),
 	puzzlePieces = document.querySelectorAll(".puzzle-pieces img"),
+	puzzlePiecesDiv = document.querySelector(".puzzle-pieces"),
 	dropZones = document.querySelectorAll('.drop-zone');
 	// store the dragged piece in a global variable
 	// because we need it in the handleDrop function
@@ -85,6 +86,17 @@ function handleDrop(e) {
     // into whatever drop zone we choose. appendChild means "add element to the container"
    
 }
+
+//reset
+function resetPuzzle() {
+	puzzlePieces.forEach((piece) => {
+		piece.classList.remove("dropped");
+		piece.parentNode.removeChild(piece);
+		puzzlePiecesDiv.appendChild(piece);
+	}
+	);
+}
+
 // step 2
 // event handling always goes at the bottom => 
 // how do we want users to interact with our app
@@ -104,3 +116,6 @@ dropZones.forEach(zone => zone.addEventListener("dragover", handleDragOver));
 
 // add the drop event handling
 dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
+
+const resetButton = document.getElementById("resetBut");
+resetButton.addEventListener("click", resetPuzzle);
