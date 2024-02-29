@@ -1,4 +1,4 @@
-# Juntarattanakamol_Apapat_HW1
+# Juntarattanakamol_Apapat_Crushing_Bugs
 This is the repository of fixed crushing bugs.
 
 ## Usage
