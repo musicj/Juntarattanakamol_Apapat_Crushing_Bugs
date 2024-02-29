@@ -6,14 +6,14 @@
 // let theButton = document.querySelector("#buttonOne");
 
 // create a 1 to many connection with a variable -> querySelectorAll("queryString")
-let theButtons = document.querySelectorAll("#buttonHolder img"),
+const theButtons = document.querySelectorAll("#buttonHolder img"),
 	theHeading = document.querySelector("#headLine h1"),
 	puzzleBoard = document.querySelector(".puzzle-board"),
 	puzzlePieces = document.querySelectorAll(".puzzle-pieces img"),
-	dropZones = document.querySelectorAll('.drop-zone'),
+	dropZones = document.querySelectorAll('.drop-zone');
 	// store the dragged piece in a global variable
 	// because we need it in the handleDrop function
-	draggedPiece;
+let draggedPiece;
 
 // step 3
 // functionality always goes in the middle -> how do we want
@@ -23,9 +23,26 @@ function changeBGImage() {
 	// inside the braces - run that little bit of code. In this case it's just pulling the ID of the
 	// button we clicked on and putting it at the end of the image name (0, 1, 2, 3)
 	// and updating the background-image style of the puzzle board element.
+	const backgroundID = this.id;
 
 	// bug fix #2 should go here. it's at most 3 lines of JS code.
-	puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
+	puzzleBoard.style.backgroundImage = `url(images/backGround${backgroundID}.jpg)`;
+
+	for (let i = 0; i < dropZones.length; i++) {
+        const zone = dropZones[i];
+        
+        if (zone.firstChild) {
+            const piece = zone.firstChild;
+            puzzlePiecesDiv.appendChild(piece);
+            piece.classList.remove("dropped");
+        }
+    }
+	
+	for (let i = 0; i < puzzlePieces.length; i++) {
+		const piece = puzzlePieces[i];
+		const originalPieceImage = piece.getAttribute('src');
+		const newPieceImage = originalPieceImage.replace(/\d/g, this.id);
+		piece.src = newPieceImage;}
 }
 
 function handleStartDrag() { 
@@ -49,6 +66,24 @@ function handleDrop(e) {
 	// this line is going to move the dragged piece from the left side of the board
 	// into whatever drop zone we choose. appendChild means "add element to the container"
 	this.appendChild(draggedPiece);
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    console.log('dropped something on me');
+    // bug fix #1 should go here, and it's at most 3 lines of JS code
+    
+	//code for when you place the images, it is won't crysh eachother
+	if (this.children.length >= 1) {
+		
+	} 
+	
+	else {
+		this.appendChild(draggedPiece);
+	}
+    // this line is going to move the dragged piece from the left side of the board
+    // into whatever drop zone we choose. appendChild means "add element to the container"
+   
 }
 // step 2
 // event handling always goes at the bottom => 
