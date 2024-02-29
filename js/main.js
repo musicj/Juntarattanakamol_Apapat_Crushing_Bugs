@@ -107,5 +107,5 @@ dropZones.forEach(zone => zone.addEventListener("dragover", handleDragOver));
 // add the drop event handling
 dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
 
-const resetButton = document.getElementById("resetBut");
-resetButton.addEventListener("click", resetPuzzle);
+const resetAll = document.getElementById("resetBut");
+resetAll.addEventListener("click", resetPuzzle);
