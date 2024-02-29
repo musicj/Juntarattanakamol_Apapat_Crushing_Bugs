@@ -10,7 +10,7 @@ const theButtons = document.querySelectorAll("#buttonHolder img"),
 	theHeading = document.querySelector("#headLine h1"),
 	puzzleBoard = document.querySelector(".puzzle-board"),
 	puzzlePieces = document.querySelectorAll(".puzzle-pieces img"),
-	puzzlePiecesDiv = document.querySelector(".puzzle-pieces"),
+	puzzlePiecesContainer = document.querySelector(".puzzle-pieces"),
 	dropZones = document.querySelectorAll('.drop-zone');
 	// store the dragged piece in a global variable
 	// because we need it in the handleDrop function
@@ -24,17 +24,17 @@ function changeBGImage() {
 	// inside the braces - run that little bit of code. In this case it's just pulling the ID of the
 	// button we clicked on and putting it at the end of the image name (0, 1, 2, 3)
 	// and updating the background-image style of the puzzle board element.
-	const backgroundID = this.id;
+	const backgroundBox = this.id;
 
 	// bug fix #2 should go here. it's at most 3 lines of JS code.
-	puzzleBoard.style.backgroundImage = `url(images/backGround${backgroundID}.jpg)`;
+	puzzleBoard.style.backgroundImage = `url(images/backGround${backgroundBox}.jpg)`;
 
 	for (let i = 0; i < dropZones.length; i++) {
         const zone = dropZones[i];
         
         if (zone.firstChild) {
             const piece = zone.firstChild;
-            puzzlePiecesDiv.appendChild(piece);
+            puzzlePiecesContainer.appendChild(piece);
             piece.classList.remove("dropped");
         }
     }
@@ -57,16 +57,6 @@ function handleDragOver(e) {
 	e.preventDefault(); // e is shorthand for event
 	// this overrides the default dragover behaviour
 	console.log('dragged over me'); 
-}
-
-function handleDrop(e) { 
-	e.preventDefault();
-	console.log('dropped something on me');
-	// bug fix #1 should go here, and it's at most 3 lines of JS code
-
-	// this line is going to move the dragged piece from the left side of the board
-	// into whatever drop zone we choose. appendChild means "add element to the container"
-	this.appendChild(draggedPiece);
 }
 
 function handleDrop(e) {
@@ -93,7 +83,7 @@ function resetPuzzle() {
         const piece = puzzlePieces[i];
         piece.classList.remove("dropped");
         piece.parentNode.removeChild(piece);
-        puzzlePiecesDiv.appendChild(piece);
+        puzzlePiecesContainer.appendChild(piece);
     }
 }
 
@@ -117,5 +107,5 @@ dropZones.forEach(zone => zone.addEventListener("dragover", handleDragOver));
 // add the drop event handling
 dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
 
-const resetButton = document.getElementById("resetBut");
-resetButton.addEventListener("click", resetPuzzle);
+const resetAll = document.getElementById("resetBut");
+resetAll.addEventListener("click", resetPuzzle);
