@@ -89,12 +89,12 @@ function handleDrop(e) {
 
 //reset
 function resetPuzzle() {
-	puzzlePieces.forEach((piece) => {
-		piece.classList.remove("dropped");
-		piece.parentNode.removeChild(piece);
-		puzzlePiecesDiv.appendChild(piece);
-	}
-	);
+    for (let i = 0; i < puzzlePieces.length; i++) {
+        const piece = puzzlePieces[i];
+        piece.classList.remove("dropped");
+        piece.parentNode.removeChild(piece);
+        puzzlePiecesDiv.appendChild(piece);
+    }
 }
 
 // step 2
